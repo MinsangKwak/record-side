@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>음악 갤러리</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style/reset.css" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
+</head>
+
+<body>
+    <header class="header p-3 text-bg-dark">
+        <div class="inner">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-between">
+                <h1 class="logo-movie">
+                    <a href="/">RECORD</a>
+                </h1>
+                <div class="header-menu">
+                    <button type="button" class="btn bg-white">로그인</button>
+                    <button type="button" class="btn bg-white">회원가입</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- s: article-search-container -->
+    <article class="article-search-container">
+        <div class="article-search-inner">
+            <!-- s: title-box -->
+            <div class="title-box">
+                <h2 class="sub-title">RECORDING</h2>
+                <p class="description">
+                    본인이 감상한 음악을 기록하는 사이트입니다.
+                </p>
+            </div>
+            <!-- e: title-box -->
+            <!-- s: post-box -->
+            <div class="post" id="input-card">
+                <div class="form-item form-floating mb-3">
+                    <input type="email" class="form-control" id="image_input" placeholder="앨범아트 이미지를 넣어주세요">
+                    <label for="image_input">음악 앨범아트를 넣어주세요</label>
+                </div>
+                <div class="form-item form-floating mb-3">
+                    <input type="text" class="form-control" id="title_input" placeholder="영화 제목">
+                    <label for="title_input">앨범명을 입력해주세요.</label>
+                </div>
+
+                <div class="form-item input-group mb-3">
+                    <button class="btn btn-outline-secondary mt-0" type="button">별점</button>
+                    <select class="form-select mt-0" id="comment_star" aria-label="Example select with button addon">
+                        <option value="" selected>별점 선택</option>
+                        <option value="1">⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                    </select>
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="comment_input"></textarea>
+                    <label for="comment_input">추천 이유</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="btn btn-outline-secondary" id="btnRecord">기록하기</button>
+                </div>
+            </div>
+            <!-- e: post-box -->
+        </div>
+    </article>
+    <!-- e: search-box -->
+
+    <!-- s: main -->
+    <main class="main">
+        <div class="mycards">
+            <div class="row card-container">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="./assets/img/sample-1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title">샘플제목 1</h4>
+                            <p class="card-text">분위기가 잔잔한 음악</p>
+                            <p>⭐⭐⭐⭐</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="./assets/img/sample-2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title">샘플제목 2</h4>
+                            <p class="card-text">평범한 음악</p>
+                            <p>⭐⭐⭐</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="./assets/img/sample-3.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title">샘플제목 3</h4>
+                            <p class="card-text">보컬이 좋아요</p>
+                            <p>⭐⭐⭐⭐⭐</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- e: main -->
+    <footer class="text-center footer">
+        <p>©Copyright 2024</p>
+    </footer>
+    <!-- s: js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="common.js" type="module"></script>
+    <!-- e: js -->
+</body>
+
+</html>

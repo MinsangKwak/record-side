@@ -1,0 +1,197 @@
+@charset "utf-8";
+
+/* s: inner */
+.inner{
+    width:1080px;
+    margin:0 auto;
+}
+/* e: inner */
+
+/* s: header */
+.header{
+    background-color:#000000;
+    font-weight:700;
+}
+.header h1.logo-movie{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+.header h1.logo-movie a{
+    display:inline-block;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size:2.4rem;
+    font-weight:700;
+    text-decoration:none;
+    color:#ffffff;
+}
+.header .header-menu{
+    display: flex;
+    gap:1rem;
+}
+/* e: header */
+
+/* s:article-search-container */
+.article-search-container {
+    background-image:url('../img/bg-record.jpg');
+    background-position:center right;
+    background-size:cover;
+    color:#ffffff;
+}
+.article-search-inner {
+    width:1080px;
+    margin:0 auto;
+    padding:5rem 0;
+    /* height: 43rem; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.article-search-container .sub-title{
+    font-size:6rem;
+    font-weight:700;
+    font-family: 'Black Han Sans', sans-serif;
+}
+.article-search-container .description{
+    margin-top:1rem;
+    font-size:1.6rem;
+    font-weight:500;
+}
+/* e:article-search-container */
+
+/* s: form */
+.form-item{}
+.form-item input{height:4rem;}
+.form-item select{height:4rem;}
+
+.input-group button,
+.input-group select {
+    background-color: rgb(168, 161, 161);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.input-group button:hover,
+.input-group select:hover {
+    background-color: gray;
+}
+
+.button-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    gap:1.5rem;
+}
+.button-container button{
+    width:10rem;
+    height:4rem;
+    font-size:1.2rem;
+}
+/* e: form */
+
+.post {
+    width: 500px;
+    margin: 20px 0px 1px 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 3px 0px transparent;
+    background-color: wheat;
+}
+
+.form-floating input,
+.form-floating textarea {
+    color: black;
+    background-color: white;
+}
+
+.form-floating textarea{
+    min-height:20rem;
+}
+
+.mycards {
+    width: 1080px;
+    margin: 30px auto;
+}
+
+.mycards .card {
+    border-radius: 30px;
+    background-color: white;
+    border: none;
+    color: black;
+}
+
+.mycards .card-img-top {
+    object-fit: cover;
+    height: 250px;
+    border-top-right-radius:20px;
+    border-top-left-radius:20px;
+}
+.mycards .card-container{
+    gap:1rem;
+}
+.mycards .card-container > .col{
+    padding:0;
+    width:calc(33% - 0.5rem);
+    flex:none;
+}
+.mycards .card-title {
+    font-size: 18px;
+}
+
+.mycards .card-body {
+    border-bottom-right-radius:20px;
+    border-bottom-left-radius:20px;
+    border: #ececec 2px solid;
+}
+
+.mycards .card-text {
+    font-size:1.4rem;
+    color: black;
+}
+
+.comment {
+    color: black;
+}
+
+a.nav-link {
+    color: #F17228;
+    font-size: large;
+}
+
+.icon {
+    height: 50px;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+#input-card {
+    width: 500px;
+    margin: 0px 0px 0px 135px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    float: left;
+}
+
+.form-floating input,
+.form-floating textarea {
+    color: black;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-floating label {
+    color: #333;
+}
+
+.footer{}
+.footer p{padding:1rem 0;background-color:#eaeaea;}
