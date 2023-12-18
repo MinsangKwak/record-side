@@ -13,7 +13,6 @@ import {
 // signOut: 현재 사용자를 로그아웃시킵니다.
 
 const firebaseConfig = {
-	// 여기에 Firebase 설정을 넣으세요
 	apiKey: "AIzaSyAN5_p4nhmJzv0XP1YGlmaEpSN6zrrwB1I",
 	authDomain: "music-gallery-6fc61.firebaseapp.com",
 	projectId: "music-gallery-6fc61",
