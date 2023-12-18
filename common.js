@@ -11,7 +11,6 @@ const firebaseConfig = {
 	// 파이어베이스에 접속한 후 프로젝트 설정에 들어갑니다.
 	// 본인 firebaseConfig 내용으로 설정해 줍니다.
 
-	const firebaseConfig = {
 	  apiKey: "AIzaSyAN5_p4nhmJzv0XP1YGlmaEpSN6zrrwB1I",
 	  authDomain: "music-gallery-6fc61.firebaseapp.com",
 	  projectId: "music-gallery-6fc61",
@@ -19,7 +18,6 @@ const firebaseConfig = {
 	  messagingSenderId: "460639710541",
 	  appId: "1:460639710541:web:d7dd21b4a44542ee0d5b04",
 	  measurementId: "G-P9MD8LT3FT"
-	};
 
 };
 
