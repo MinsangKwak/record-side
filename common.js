@@ -11,13 +11,16 @@ const firebaseConfig = {
 	// 파이어베이스에 접속한 후 프로젝트 설정에 들어갑니다.
 	// 본인 firebaseConfig 내용으로 설정해 줍니다.
 
-	apiKey: "AIzaSyBF-t53YpLZCiWkdTG35sjCsSM4jpOMuoo",
-	authDomain: "sparta-d6a7f.firebaseapp.com",
-	projectId: "sparta-d6a7f",
-	storageBucket: "sparta-d6a7f.appspot.com",
-	messagingSenderId: "449408338950",
-	appId: "1:449408338950:web:96ebff213eb43ad3658787",
-	measurementId: "G-E7YH549562",
+	const firebaseConfig = {
+	  apiKey: "AIzaSyAN5_p4nhmJzv0XP1YGlmaEpSN6zrrwB1I",
+	  authDomain: "music-gallery-6fc61.firebaseapp.com",
+	  projectId: "music-gallery-6fc61",
+	  storageBucket: "music-gallery-6fc61.appspot.com",
+	  messagingSenderId: "460639710541",
+	  appId: "1:460639710541:web:d7dd21b4a44542ee0d5b04",
+	  measurementId: "G-P9MD8LT3FT"
+	};
+
 };
 
 const app = initializeApp(firebaseConfig);
