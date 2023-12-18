@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
+    <title>음악 갤러리</title>
+    <link rel="stylesheet" href="./assets/style/reset.css" />
+    <link rel="stylesheet" href="./assets/style/common.css" />
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="inner header-inner">
+            <h1 class="logo">
+                <a href="/">RECORD</a>
+            </h1>
+            <nav class="header-navigation">
+                <ul class="list-navigation">
+                    <li>
+                        <a href="#none;" id="btn-logout">로그아웃</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- s: main -->
+    <article class="search-container">
+        <div class="inner section-inner">
+            <!-- s: title-box -->
+            <div class="title-box">
+                <h2 class="sub-title">RECORDING</h2>
+                <p class="sub-description">
+                    본인이 감상한 음악을 기록하는 사이트입니다.
+                </p>
+            </div>
+            <!-- e: title-box -->
+            <article class="article-content">
+                <!-- s: post-box -->
+                <div class="post-box" id="input-card">
+                    <div class="form-inner">
+                        <div class="input-container">
+                            <div class="input-item">
+                                <label class="input-label" for="album-art">음악 앨범아트를 넣어주세요</label>
+                                <input type="email" class="form-control" id="album-art" placeholder="앨범아트 이미지를 넣어주세요">
+                            </div>
+                            <div class="input-item">
+                                <label class="input-label" for="album-title">앨범명을 입력해주세요.</label>
+                                <input type="text" class="form-control" id="album-title" placeholder="영화 제목">
+                            </div>
+                            <div class="input-item input-multiply">
+                                <button class="btn btn-primary" type="button" disabled>별점</button>
+                                <select class="form-select" id="album-star">
+                                    <option value="" selected>별점 선택</option>
+                                    <option value="1">⭐</option>
+                                    <option value="2">⭐⭐</option>
+                                    <option value="3">⭐⭐⭐</option>
+                                    <option value="4">⭐⭐⭐⭐</option>
+                                    <option value="5">⭐⭐⭐⭐⭐</option>
+                                </select>
+                            </div>
+                            <div class="textarea-container">
+                                <label class="input-label" for="comment_input">추천 이유</label>
+                                <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="album-comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="btn-container">
+                            <button type="button" class="btn btn-primary" id="btn-record">기록하기</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- e: post-box -->
+            </article>
+        </div>
+    </article>
+    <section class="section section-main">
+        <div class="inner section-inner">
+            <div class="card-wrapper">
+                <div class="row card-container">
+                    <div class="card">
+                        <div class="card-inner">
+                            <img src="./assets/img/sample-1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title">샘플제목 1</h4>
+                                <p class="card-text">분위기가 잔잔한 음악</p>
+                                <p class="card-star">⭐⭐⭐⭐</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- e: main -->
+    <footer class="text-center footer">
+        <p>©Copyright 2024</p>
+    </footer>
+</body>
+
+</html>

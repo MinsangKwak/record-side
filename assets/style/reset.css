@@ -7,8 +7,12 @@
     box-sizing:border-box;
     font-family: 'Gowun Dodum', 'Black Han Sans', sans-serif;
     line-height:1.4;
+    outline:none;
 }
-
+ul,
+ol,
+li{list-style:none;}
+a{text-decoration:none;}
 html{
     font-size:62.5%;
 }
@@ -19,3 +23,89 @@ body {
 
 h1, h2, h3, h4, h5, h6{margin-bottom:0;}
 p{margin-bottom:0;}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"]{
+    display:inline-block;
+    width:100%;
+    height:40px;
+}
+
+select{
+    display:inline-block;
+    width:100%;
+    height:40px;
+}
+
+textarea{
+    display:inline-block;
+    width:100%;
+    min-height:140px;
+}
+
+
+button{
+    display:inline-block;
+    width:100%;
+    height:40px;
+    border:none;
+}
+
+.input{
+    border:1px solid #ececec;
+}
+
+.btn-container{
+    display:flex;
+    gap:0.5rem;
+}
+
+.btn{
+    border:1px solid #ececec;
+    background-color:#ececec;
+    color:#111111;
+}
+
+.btn-primary{
+    background-color:#C0392B;
+    border-color:#A93226;
+    color:#ffffff;
+}
+.btn-primary:hover{
+    background-color:#E74C3C;
+    border-color:#C0392B;
+    color:#ffffff;
+}
+.btn-primary:active{
+    background-color:#922B21;
+    border-color:#78281F;
+    color:#ffffff;
+}
+.btn-primary:disabled{
+    background-color:#CD6155;
+    border-color:#B03A2E;
+    color:#ffffff;
+}
+
+.btn-secondary{
+    background-color:#333333;
+    border-color:#2C2C2C;
+    color:#ffffff;
+}
+.btn-secondary:hover{
+    background-color:#3D3D3D;
+    border-color:#333333;
+    color:#ffffff;
+}
+.btn-secondary:active{
+    background-color:#262626;
+    border-color:#1F1F1F;
+    color:#ffffff;
+}
+.btn-secondary:disabled{
+    background-color:#595959;
+    border-color:#4D4D4D;
+    color:#ffffff;
+}
