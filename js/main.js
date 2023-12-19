@@ -88,7 +88,9 @@ async function loadAlbums(page) {
         albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
     }
 
+    console.log("Executing query for page:", page); // 쿼리 실행 로그
     const querySnapshot = await getDocs(albumsQuery);
+    console.log("QuerySnapshot docs:", querySnapshot.docs); // 쿼리 결과 로그
 
     if (!querySnapshot.empty) {
         lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
