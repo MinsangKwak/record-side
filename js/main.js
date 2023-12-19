@@ -78,36 +78,37 @@ const pageSize = 2; // 한 페이지에 표시할 항목 수
 
 // 데이터 읽기 및 카드 생성
 async function loadAlbums(page) {
-	// let cardContainer = document.querySelector(".card-container");
-	// cardContainer.innerHTML = "";
-	// const querySnapshot = await getDocs(collection(db, "albums"));
-
     let cardContainer = document.querySelector(".card-container");
-    // cardContainer.innerHTML = "";
+    cardContainer.innerHTML = "";
 
     let albumsQuery;
     if (page === 1) {
-		albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), limit(pageSize));
+        albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), limit(pageSize));
     } else if (lastVisible) {
-		albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
+        albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
     }
 
     const querySnapshot = await getDocs(albumsQuery);
     console.log(querySnapshot.docs); // 데이터 로그 출력
-	
-	if (!querySnapshot.empty) {
+
+    if (!querySnapshot.empty) {
         lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
         querySnapshot.forEach((doc) => {
             let data = doc.data();
             console.log(data); // 각 문서 데이터 로그 출력
-            // 카드 생성 로직
+            let title = data.title;
+            let comment = data.comment;
+            let star = "⭐".repeat(data.star);
+            let image = data.image;
+
+            let tempHtml = `<div class="card h-100">...</div>`;
+
+            cardContainer.insertAdjacentHTML("beforeend", tempHtml);
         });
     } else {
         console.log("No data found");
     }
-	
-    // lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
 	querySnapshot.forEach((doc) => {
 		let data = doc.data();
