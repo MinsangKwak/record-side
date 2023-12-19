@@ -2,17 +2,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import {
-	collection,
-	addDoc,
-	getDocs,
-	query,
-	orderBy,
-	limit,
-	startAfter
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    limit,
+    startAfter
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import { auth, signOut, onAuthStateChanged } from "./firebaseInit.js";
 
 const firebaseConfig = {
+    // ... Firebase 설정
 	apiKey: "AIzaSyAN5_p4nhmJzv0XP1YGlmaEpSN6zrrwB1I",
 	authDomain: "music-gallery-6fc61.firebaseapp.com",
 	projectId: "music-gallery-6fc61",
@@ -26,55 +27,53 @@ const db = getFirestore(app);
 
 // 사용자 인증 상태 체크
 onAuthStateChanged(auth, (user) => {
-	if (!user) {
-		window.location.href = "error.html";
-	}
+    if (!user) {
+        window.location.href = "error.html";
+    }
 });
 
 // 로그아웃 기능
 document.querySelector("#btn-logout").addEventListener("click", (e) => {
-	e.preventDefault();
-	signOut(auth)
-		.then(() => {
-			window.location.href = "logout.html";
-		})
-		.catch((error) => {
-			console.error("Logout failed:", error);
-		});
+    e.preventDefault();
+    signOut(auth)
+        .then(() => {
+            window.location.href = "logout.html";
+        })
+        .catch((error) => {
+            console.error("Logout failed:", error);
+        });
 });
 
 // 데이터 추가 기능
-document
-	.querySelector("#btn-record")
-	.addEventListener("click", async function () {
-		let title = document.getElementById("album-title").value;
-		let comment = document.getElementById("album-comment").value;
-		let star = document.getElementById("album-star").value;
-		let image = document.getElementById("album-art").value;
+document.querySelector("#btn-record").addEventListener("click", async function () {
+    let title = document.getElementById("album-title").value;
+    let comment = document.getElementById("album-comment").value;
+    let star = document.getElementById("album-star").value;
+    let image = document.getElementById("album-art").value;
 
-		if (!star) {
-			alert("별점을 선택해주세요!");
-			return; // 별점이 선택되지 않았으면 함수를 종료
-		}
+    if (!star) {
+        alert("별점을 선택해주세요!");
+        return;
+    }
 
-		try {
-			const docRef = await addDoc(collection(db, "albums"), {
-				title: title,
-				comment: comment,
-				star: star || "0", // 별점이 선택되지 않았을 때 기본값 설정
-				image: image,
-			});
+    try {
+        await addDoc(collection(db, "albums"), {
+            title: title,
+            comment: comment,
+            star: star || "0",
+            image: image,
+        });
 
-			alert("앨범이 추가되었습니다!");
-			window.location.reload();
-		} catch (e) {
-			console.error("Error adding document: ", e);
-		}
-	});
+        alert("앨범이 추가되었습니다!");
+        window.location.reload();
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+});
 
-let lastVisible; // 마지막 문서 스냅샷
-let currentPage = 1; // 현재 페이지 번호
-const pageSize = 2; // 한 페이지에 표시할 항목 수
+let lastVisible;
+let currentPage = 1;
+const pageSize = 2;
 
 // 데이터 읽기 및 카드 생성
 async function loadAlbums(page) {
@@ -89,26 +88,19 @@ async function loadAlbums(page) {
     }
 
     const querySnapshot = await getDocs(albumsQuery);
-    console.log(querySnapshot.docs); // 데이터 로그 출력
 
     if (!querySnapshot.empty) {
         lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
         querySnapshot.forEach((doc) => {
             let data = doc.data();
-            console.log(data); // 각 문서 데이터 로그 출력
-            let title = data.title;
-            let comment = data.comment;
-            let star = "⭐".repeat(data.star);
-            let image = data.image;
-
             let tempHtml = `<div class="card h-100">
                                 <div class="card-inner">
-                                    <img src="${image}" class="card-img-top" alt="${title}">
+                                    <img src="${data.image}" class="card-img-top" alt="${data.title}">
                                     <div class="card-body">
-                                        <h4 class="card-title">${title}</h4>
-                                        <p class="card-text">${comment}</p>
-                                        <p class="card-star">${star}</p>
+                                        <h4 class="card-title">${data.title}</h4>
+                                        <p class="card-text">${data.comment}</p>
+                                        <p class="card-star">${"⭐".repeat(data.star)}</p>
                                     </div>
                                 </div>
                             </div>`;
@@ -120,22 +112,19 @@ async function loadAlbums(page) {
     }
 }
 
-
 // 페이지네이션 컨트롤 이벤트 핸들러
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#nextPage").addEventListener("click", () => {
         currentPage += 1;
-        loadAlbums(currentPage); // currentPage를 매개변수로 전달
+        loadAlbums(currentPage);
     });
 
     document.querySelector("#prevPage").addEventListener("click", () => {
         if (currentPage > 1) {
             currentPage -= 1;
-            loadAlbums(currentPage); // currentPage를 매개변수로 전달
+            loadAlbums(currentPage);
         }
     });
 
-    // 초기 데이터 로드
-    loadAlbums(currentPage); // currentPage를 매개변수로 전달
+    loadAlbums(currentPage);
 });
-
