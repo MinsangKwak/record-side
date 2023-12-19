@@ -93,8 +93,21 @@ async function loadAlbums(page) {
     }
 
     const querySnapshot = await getDocs(albumsQuery);
-    lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+    console.log(querySnapshot.docs); // 데이터 로그 출력
+	
+	if (!querySnapshot.empty) {
+        lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
+        querySnapshot.forEach((doc) => {
+            let data = doc.data();
+            console.log(data); // 각 문서 데이터 로그 출력
+            // 카드 생성 로직
+        });
+    } else {
+        console.log("No data found");
+    }
+	
+    // lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
 	querySnapshot.forEach((doc) => {
 		let data = doc.data();
@@ -102,20 +115,19 @@ async function loadAlbums(page) {
 		let comment = data.comment;
 		let star = "⭐".repeat(data.star);
 		let image = data.image;
-
-		let tempHtml = `
-        <div class="card h-100">
-            <div class="card-inner">
-                <img src="${image}"
-                    class="card-img-top" alt="${image}+의 주소를 가진 이미지 입니다}">
-                <div class="card-body">
-                    <h4 class="card-title">${title}</h4>
-                    <p class="card-text">${comment}</p>
-                    <p class="card-star">${star}</p>
-                </div>
-            </div>
-        </div>`;
-
+	
+		let tempHtml = `<div class="card h-100">
+				    <div class="card-inner">
+					<img src="${image}"
+					    class="card-img-top" alt="${image}+의 주소를 가진 이미지 입니다}">
+					<div class="card-body">
+					    <h4 class="card-title">${title}</h4>
+					    <p class="card-text">${comment}</p>
+					    <p class="card-star">${star}</p>
+					</div>
+				    </div>
+				</div>`;
+	
 		cardContainer.insertAdjacentHTML("beforeend", tempHtml);
 	});
 }
