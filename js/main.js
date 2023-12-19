@@ -5,6 +5,10 @@ import {
 	collection,
 	addDoc,
 	getDocs,
+	query,
+	orderBy,
+	limit,
+	startAfter
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import { auth, signOut, onAuthStateChanged } from "./firebaseInit.js";
 
@@ -81,14 +85,14 @@ async function loadAlbums(page) {
     let cardContainer = document.querySelector(".card-container");
     cardContainer.innerHTML = "";
 
-    let query;
+    let albumsQuery;
     if (page === 1) {
-	query = query(collection(db, "albums"), orderBy("createdAt", "desc"), limit(pageSize));
+		albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), limit(pageSize));
     } else if (lastVisible) {
-	query = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
+		albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
     }
 
-    const querySnapshot = await getDocs(query);
+    const querySnapshot = await getDocs(albumsQuery);
     lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
 
