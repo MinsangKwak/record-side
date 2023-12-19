@@ -102,36 +102,24 @@ async function loadAlbums(page) {
             let star = "⭐".repeat(data.star);
             let image = data.image;
 
-            let tempHtml = `<div class="card h-100">...</div>`;
+            let tempHtml = `<div class="card h-100">
+                                <div class="card-inner">
+                                    <img src="${image}" class="card-img-top" alt="${title}">
+                                    <div class="card-body">
+                                        <h4 class="card-title">${title}</h4>
+                                        <p class="card-text">${comment}</p>
+                                        <p class="card-star">${star}</p>
+                                    </div>
+                                </div>
+                            </div>`;
 
             cardContainer.insertAdjacentHTML("beforeend", tempHtml);
         });
     } else {
         console.log("No data found");
     }
-
-	querySnapshot.forEach((doc) => {
-		let data = doc.data();
-		let title = data.title;
-		let comment = data.comment;
-		let star = "⭐".repeat(data.star);
-		let image = data.image;
-	
-		let tempHtml = `<div class="card h-100">
-				    <div class="card-inner">
-					<img src="${image}"
-					    class="card-img-top" alt="${image}+의 주소를 가진 이미지 입니다}">
-					<div class="card-body">
-					    <h4 class="card-title">${title}</h4>
-					    <p class="card-text">${comment}</p>
-					    <p class="card-star">${star}</p>
-					</div>
-				    </div>
-				</div>`;
-	
-		cardContainer.insertAdjacentHTML("beforeend", tempHtml);
-	});
 }
+
 
 // 페이지네이션 컨트롤 이벤트 핸들러
 document.addEventListener('DOMContentLoaded', (event) => {
