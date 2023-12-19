@@ -68,11 +68,29 @@ document
 		}
 	});
 
+let lastVisible; // 마지막 문서 스냅샷
+let currentPage = 1; // 현재 페이지 번호
+const pageSize = 2; // 한 페이지에 표시할 항목 수
+
 // 데이터 읽기 및 카드 생성
 async function loadAlbums() {
-	let cardContainer = document.querySelector(".card-container");
-	cardContainer.innerHTML = "";
-	const querySnapshot = await getDocs(collection(db, "albums"));
+	// let cardContainer = document.querySelector(".card-container");
+	// cardContainer.innerHTML = "";
+	// const querySnapshot = await getDocs(collection(db, "albums"));
+
+    let cardContainer = document.querySelector(".card-container");
+    cardContainer.innerHTML = "";
+
+    let query;
+    if (page === 1) {
+	query = query(collection(db, "albums"), orderBy("createdAt", "desc"), limit(pageSize));
+    } else if (lastVisible) {
+	query = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
+    }
+
+    const querySnapshot = await getDocs(query);
+    lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+
 
 	querySnapshot.forEach((doc) => {
 		let data = doc.data();
@@ -98,4 +116,17 @@ async function loadAlbums() {
 	});
 }
 
-loadAlbums();
+// 페이지네이션 컨트롤 이벤트 핸들러
+document.querySelector("#nextPage").addEventListener("click", () => {
+    currentPage += 1;
+    loadAlbums(currentPage);
+});
+
+document.querySelector("#prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage -= 1;
+        loadAlbums(currentPage);
+    }
+});
+
+loadAlbums(currentPage);
