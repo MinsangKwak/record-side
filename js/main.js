@@ -83,7 +83,7 @@ async function loadAlbums(page) {
 	// const querySnapshot = await getDocs(collection(db, "albums"));
 
     let cardContainer = document.querySelector(".card-container");
-    cardContainer.innerHTML = "";
+    // cardContainer.innerHTML = "";
 
     let albumsQuery;
     if (page === 1) {
