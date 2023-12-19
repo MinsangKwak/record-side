@@ -117,16 +117,20 @@ async function loadAlbums() {
 }
 
 // 페이지네이션 컨트롤 이벤트 핸들러
-document.querySelector("#nextPage").addEventListener("click", () => {
-    currentPage += 1;
-    loadAlbums(currentPage);
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelector("#nextPage").addEventListener("click", () => {
+        currentPage += 1;
+        loadAlbums(currentPage); // currentPage를 매개변수로 전달
+    });
+
+    document.querySelector("#prevPage").addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage -= 1;
+            loadAlbums(currentPage); // currentPage를 매개변수로 전달
+        }
+    });
+
+    // 초기 데이터 로드
+    loadAlbums(currentPage); // currentPage를 매개변수로 전달
 });
 
-document.querySelector("#prevPage").addEventListener("click", () => {
-    if (currentPage > 1) {
-        currentPage -= 1;
-        loadAlbums(currentPage);
-    }
-});
-
-loadAlbums(currentPage);
