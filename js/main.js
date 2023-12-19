@@ -1,19 +1,19 @@
 // Firebase 초기화 및 모듈 임포트
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getFirestore, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
 import {
-    collection,
-    addDoc,
-    getDocs,
-    query,
-    orderBy,
-    limit,
-    startAfter
+	getFirestore,
+	query,
+	orderBy,
+} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+import {
+	collection,
+	addDoc,
+	getDocs,
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import { auth, signOut, onAuthStateChanged } from "./firebaseInit.js";
 
 const firebaseConfig = {
-    // ... Firebase 설정
 	apiKey: "AIzaSyAN5_p4nhmJzv0XP1YGlmaEpSN6zrrwB1I",
 	authDomain: "music-gallery-6fc61.firebaseapp.com",
 	projectId: "music-gallery-6fc61",
@@ -27,107 +27,85 @@ const db = getFirestore(app);
 
 // 사용자 인증 상태 체크
 onAuthStateChanged(auth, (user) => {
-    if (!user) {
-        window.location.href = "error.html";
-    }
+	if (!user) {
+		window.location.href = "error.html";
+	}
 });
 
 // 로그아웃 기능
 document.querySelector("#btn-logout").addEventListener("click", (e) => {
-    e.preventDefault();
-    signOut(auth)
-        .then(() => {
-            window.location.href = "logout.html";
-        })
-        .catch((error) => {
-            console.error("Logout failed:", error);
-        });
+	e.preventDefault();
+	signOut(auth)
+		.then(() => {
+			window.location.href = "logout.html";
+		})
+		.catch((error) => {
+			console.error("Logout failed:", error);
+		});
 });
 
 // 데이터 추가 기능
-document.querySelector("#btn-record").addEventListener("click", async function () {
-    let title = document.getElementById("album-title").value;
-    let comment = document.getElementById("album-comment").value;
-    let star = document.getElementById("album-star").value;
-    let image = document.getElementById("album-art").value;
+document
+	.querySelector("#btn-record")
+	.addEventListener("click", async function () {
+		let title = document.getElementById("album-title").value;
+		let comment = document.getElementById("album-comment").value;
+		let star = document.getElementById("album-star").value;
+		let image = document.getElementById("album-art").value;
 
-    if (!star) {
-        alert("별점을 선택해주세요!");
-        return;
-    }
+		if (!star) {
+			alert("별점을 선택해주세요!");
+			return; // 별점이 선택되지 않았으면 함수를 종료
+		}
 
-    try {
-        await addDoc(collection(db, "albums"), {
-            title: title,
-            comment: comment,
-            star: star || "0",
-            image: image,
-            createdAt: Timestamp.now() // 현재 시간 추가
-        });
+		try {
+			const docRef = await addDoc(collection(db, "albums"), {
+				title: title,
+				comment: comment,
+				star: star || "0", // 별점이 선택되지 않았을 때 기본값 설정
+				image: image,
+				created: new Date(), // 현재 시간을 추가
+			});
 
-        alert("앨범이 추가되었습니다!");
-        window.location.reload();
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
-});
-
-let lastVisible;
-let currentPage = 1;
-const pageSize = 2;
+			alert("앨범이 추가되었습니다!");
+			window.location.reload();
+		} catch (e) {
+			console.error("Error adding document: ", e);
+		}
+	});
 
 // 데이터 읽기 및 카드 생성
-async function loadAlbums(page) {
-    let cardContainer = document.querySelector(".card-container");
-    cardContainer.innerHTML = "";
+async function loadAlbums() {
+	let cardContainer = document.querySelector(".card-container");
+	cardContainer.innerHTML = "";
+	const albumsQuery = query(
+		collection(db, "albums"),
+		orderBy("created", "desc")
+	); // 생성 시간에 따라 내림차순 정렬
+	const querySnapshot = await getDocs(albumsQuery);
 
-    let albumsQuery;
-    if (page === 1) {
-        albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), limit(pageSize));
-    } else if (lastVisible) {
-        albumsQuery = query(collection(db, "albums"), orderBy("createdAt", "desc"), startAfter(lastVisible), limit(pageSize));
-    }
+	querySnapshot.forEach((doc) => {
+		let data = doc.data();
+		let title = data.title;
+		let comment = data.comment;
+		let star = "⭐".repeat(data.star);
+		let image = data.image;
 
-    console.log("Executing query for page:", page); // 쿼리 실행 로그
-    const querySnapshot = await getDocs(albumsQuery);
-    console.log("QuerySnapshot docs:", querySnapshot.docs); // 쿼리 결과 로그
+		let tempHtml = `
+        <div class="card h-100">
+            <div class="card-inner">
+                <img src="${image}"
+                    class="card-img-top" alt="${image}+의 주소를 가진 이미지 입니다}">
+                <div class="card-body">
+                    <h4 class="card-title">${title}</h4>
+                    <p class="card-text">${comment}</p>
+                    <p class="card-star">${star}</p>
+                </div>
+            </div>
+        </div>`;
 
-    if (!querySnapshot.empty) {
-        lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-
-        querySnapshot.forEach((doc) => {
-            let data = doc.data();
-            let tempHtml = `<div class="card h-100">
-                                <div class="card-inner">
-                                    <img src="${data.image}" class="card-img-top" alt="${data.title}">
-                                    <div class="card-body">
-                                        <h4 class="card-title">${data.title}</h4>
-                                        <p class="card-text">${data.comment}</p>
-                                        <p class="card-star">${"⭐".repeat(data.star)}</p>
-                                    </div>
-                                </div>
-                            </div>`;
-
-            cardContainer.insertAdjacentHTML("beforeend", tempHtml);
-        });
-    } else {
-        console.log("No data found");
-    }
+		cardContainer.insertAdjacentHTML("beforeend", tempHtml);
+	});
 }
 
-// 페이지네이션 컨트롤 이벤트 핸들러
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector("#nextPage").addEventListener("click", () => {
-        currentPage += 1;
-        loadAlbums(currentPage);
-    });
-
-    document.querySelector("#prevPage").addEventListener("click", () => {
-        if (currentPage > 1) {
-            currentPage -= 1;
-            loadAlbums(currentPage);
-        }
-    });
-
-    loadAlbums(currentPage);
-});
+loadAlbums();
