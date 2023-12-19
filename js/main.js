@@ -1,6 +1,6 @@
 // Firebase 초기화 및 모듈 임포트
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+import { getFirestore, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import {
     collection,
     addDoc,
@@ -62,6 +62,7 @@ document.querySelector("#btn-record").addEventListener("click", async function (
             comment: comment,
             star: star || "0",
             image: image,
+            createdAt: Timestamp.now() // 현재 시간 추가
         });
 
         alert("앨범이 추가되었습니다!");
