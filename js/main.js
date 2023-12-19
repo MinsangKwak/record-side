@@ -73,7 +73,7 @@ let currentPage = 1; // 현재 페이지 번호
 const pageSize = 2; // 한 페이지에 표시할 항목 수
 
 // 데이터 읽기 및 카드 생성
-async function loadAlbums() {
+async function loadAlbums(page) {
 	// let cardContainer = document.querySelector(".card-container");
 	// cardContainer.innerHTML = "";
 	// const querySnapshot = await getDocs(collection(db, "albums"));
